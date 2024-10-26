@@ -1,0 +1,17 @@
+scalar DateTime
+scalar Decimal
+
+type Query {
+  participants: [Participant!]!
+}
+
+type Participant {
+  id: String!
+  name: String!
+  hasDiabetes: Boolean!
+  hadCovid: Boolean!
+  heightInInches: Float!
+  weightInPounds: Float!
+  enrolledAt: DateTime
+  updatedAt: DateTime
+}
