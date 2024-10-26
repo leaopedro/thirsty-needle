@@ -1,4 +1,4 @@
 -- CreateTable
 CREATE TABLE "Trial" (
-    "id" TEXT NOT NULL PRIMARY KEY
+    "id" TEXT PRIMARY KEY NOT NULL
 );
