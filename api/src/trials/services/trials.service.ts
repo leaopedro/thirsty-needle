@@ -16,6 +16,7 @@ export class TrialsService {
     return trials.map(trial => ({
       ...trial,
       participantsCount: trial.participants.length,
+      participants: undefined,
     }));
   }
 }

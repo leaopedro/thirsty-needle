@@ -17,10 +17,6 @@ describe('TrialsResolver', () => {
     trialsService = module.get<TrialsService>(TrialsService);
   });
 
-  it('should be defined', () => {
-    expect(resolver).toBeDefined();
-  });
-
   describe('trials', () => {
     it('should return an array of trials with participants count', async () => {
       const result: Trial[] = [
