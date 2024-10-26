@@ -1,7 +1,9 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import { ApolloProvider } from '@apollo/client';
 
+import client from './apolloClient';
 import LogoSvg from './assets/svg/curebase-logo.svg';
 import NavMenu from './NavMenu';
 import Participants from './participants/Participants';
@@ -10,20 +12,22 @@ import Trials from './trials/Trials';
 
 const App: React.FC = () => {
   return (
-    <Router>
-      <Container>
-        <Header>
-          <Logo src={LogoSvg}></Logo>
-          <NavMenu></NavMenu>
-        </Header>
-        <Content>
-          <Routes>
-            <Route path="/participants" element={<Participants />} />
-            <Route path="/trials" element={<Trials />} />
-          </Routes>
-        </Content>
-      </Container>
-    </Router>
+    <ApolloProvider client={client}>
+      <Router>
+        <Container>
+          <Header>
+            <Logo alt='curebase logo' src={LogoSvg}></Logo>
+            <NavMenu></NavMenu>
+          </Header>
+          <Content>
+            <Routes>
+              <Route path="/participants" element={<Participants />} />
+              <Route path="/trials" element={<Trials />} />
+            </Routes>
+          </Content>
+        </Container>
+      </Router>
+    </ApolloProvider>
   );
 };
 
