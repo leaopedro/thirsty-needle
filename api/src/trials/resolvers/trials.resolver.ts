@@ -8,6 +8,6 @@ export class TrialsResolver {
 
   @Query('trials')
   async trials(): Promise<Trial[]> {
-    return await this.trialsService.getTrials();
+    return await this.trialsService.getTrialsWithParticipantsCount();
   }
 }

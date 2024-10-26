@@ -22,13 +22,14 @@ export interface Participant {
     weightInPounds: number;
     enrolledAt?: Nullable<DateTime>;
     updatedAt?: Nullable<DateTime>;
+    trial?: Nullable<Trial>;
 }
 
 export interface Trial {
     id: string;
     name: string;
+    participantsCount: number;
 }
 
 export type DateTime = any;
-export type Decimal = any;
 type Nullable<T> = T | null;
