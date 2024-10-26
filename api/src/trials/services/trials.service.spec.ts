@@ -1,4 +1,3 @@
-// trials.service.spec.ts
 import { Test, TestingModule } from '@nestjs/testing';
 import { TrialsService } from './trials.service';
 import { PrismaService } from 'src/common/prisma.service';
