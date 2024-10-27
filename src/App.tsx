@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link, useLocation } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import styled from 'styled-components';
 import { ApolloProvider } from '@apollo/client';
 
@@ -7,6 +7,7 @@ import client from './apolloClient';
 import LogoSvg from './assets/svg/curebase-logo.svg';
 import NavMenu from './NavMenu';
 import Participants from './participants/Participants';
+import EnrollParticipant from './participants/Enroll';
 import Trials from './trials/Trials';
 
 
@@ -22,6 +23,7 @@ const App: React.FC = () => {
           <Content>
             <Routes>
               <Route path="/participants" element={<Participants />} />
+              <Route path="/participants/enroll" element={<EnrollParticipant />} />
               <Route path="/trials" element={<Trials />} />
             </Routes>
           </Content>
@@ -33,7 +35,7 @@ const App: React.FC = () => {
 
 
 const Container = styled.div`
-  font-family: Arial, sans-serif;
+  font-family: 'Lato', sans-serif;
   width: 100%;
 `;
 
