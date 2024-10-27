@@ -8,9 +8,22 @@
 /* tslint:disable */
 /* eslint-disable */
 
+export interface EnrollParticipantInput {
+    name: string;
+    hasDiabetes: boolean;
+    hadCovid: boolean;
+    heightInInches: number;
+    weightInPounds: number;
+    trialId: string;
+}
+
 export interface IQuery {
     participants(): Participant[] | Promise<Participant[]>;
     trials(): Trial[] | Promise<Trial[]>;
+}
+
+export interface IMutation {
+    enrollParticipant(input: EnrollParticipantInput): Participant | Promise<Participant>;
 }
 
 export interface Participant {
@@ -20,8 +33,8 @@ export interface Participant {
     hadCovid: boolean;
     heightInInches: number;
     weightInPounds: number;
-    enrolledAt?: Nullable<DateTime>;
-    updatedAt?: Nullable<DateTime>;
+    enrolledAt: DateTime;
+    updatedAt: DateTime;
     trial?: Nullable<Trial>;
 }
 

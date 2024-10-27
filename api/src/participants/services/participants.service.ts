@@ -1,6 +1,8 @@
-import { Injectable } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+// src/participants/services/participants.service.ts
+import { Injectable, BadRequestException } from '@nestjs/common';
+import { Participant, Prisma } from '@prisma/client';
 import { PrismaService } from 'src/common/prisma.service';
+import { EnrollParticipantInput } from '../dto/enroll-participant.input';
 
 @Injectable()
 export class ParticipantsService {
@@ -8,5 +10,47 @@ export class ParticipantsService {
 
   async getParticipants(whereInput?: Prisma.ParticipantWhereInput) {
     return this.prismaService.participant.findMany({ where: whereInput });
+  }
+
+  async enrollParticipant(data: EnrollParticipantInput): Promise<Participant> {
+    const { trialId, ...participantData } = data;
+
+    // Extract fields needed for validation
+    const {
+      hasDiabetes,
+      hadCovid,
+      heightInInches,
+      weightInPounds,
+    } = participantData;
+
+    // Ensure numerical values are correctly typed
+    const height = Number(heightInInches);
+    const weight = Number(weightInPounds);
+
+    // Calculate BMI using the formula: BMI = (weight / (height^2)) * 703
+    const bmi = (weight / (height * height)) * 703;
+
+    // Eligibility criteria
+    if (!hasDiabetes) {
+      throw new BadRequestException('Participant must have diabetes.');
+    }
+
+    if (hadCovid) {
+      throw new BadRequestException('Participant must not have had COVID-19.');
+    }
+
+    if (bmi <= 18 || bmi >= 30) {
+      throw new BadRequestException(
+        `Participant BMI must be greater than 18 and less than 30. Current BMI: ${bmi}`,
+      );
+    }
+
+    // Proceed with insertion if eligible
+    const prismaData: Prisma.ParticipantCreateInput = {
+      ...participantData,
+      trial: trialId ? { connect: { id: trialId } } : undefined,
+    };
+
+    return this.prismaService.participant.create({ data: prismaData });
   }
 }
