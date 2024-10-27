@@ -1,6 +1,7 @@
-import { Resolver, Query } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args } from '@nestjs/graphql';
 import { ParticipantsService } from '../services/participants.service';
 import { Participant } from 'src/graphql';
+import { EnrollParticipantInput } from '../dto/enroll-participant.input';
 
 @Resolver()
 export class ParticipantsResolver {
@@ -9,5 +10,12 @@ export class ParticipantsResolver {
   @Query('participants')
   async participants(): Promise<Participant[]> {
     return await this.participantsService.getParticipants();
+  }
+
+  @Mutation('enrollParticipant')
+  async enrollParticipant(
+    @Args('input') input: EnrollParticipantInput,
+  ): Promise<Participant> {
+    return this.participantsService.enrollParticipant(input);
   }
 }

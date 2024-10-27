@@ -4,6 +4,19 @@ type Query {
   participants: [Participant!]!
 }
 
+type Mutation {
+  enrollParticipant(input: EnrollParticipantInput!): Participant!
+}
+
+input EnrollParticipantInput {
+  name: String!
+  hasDiabetes: Boolean!
+  hadCovid: Boolean!
+  heightInInches: Float!
+  weightInPounds: Float!
+  trialId: String!
+}
+
 type Participant {
   id: String!
   name: String!
@@ -11,7 +24,7 @@ type Participant {
   hadCovid: Boolean!
   heightInInches: Float!
   weightInPounds: Float!
-  enrolledAt: DateTime
-  updatedAt: DateTime
+  enrolledAt: DateTime!
+  updatedAt: DateTime!
   trial: Trial
 }

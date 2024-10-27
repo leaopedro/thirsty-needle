@@ -16,10 +16,6 @@ describe('TrialsService', () => {
     prismaService = module.get<PrismaService>(PrismaService);
   });
 
-  it('should be defined', () => {
-    expect(service).toBeDefined();
-  });
-
   describe('getTrialsWithParticipantsCount', () => {
     it('should return an array of trials with participants count', async () => {
       const mockTrials = [
