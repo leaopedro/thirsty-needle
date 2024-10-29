@@ -1,4 +1,3 @@
-// src/participants/services/participants.service.ts
 import { Injectable, BadRequestException } from '@nestjs/common';
 import { Participant, Prisma } from '@prisma/client';
 import { PrismaService } from 'src/common/prisma.service';
@@ -15,7 +14,6 @@ export class ParticipantsService {
   async enrollParticipant(data: EnrollParticipantInput): Promise<Participant> {
     const { trialId, ...participantData } = data;
 
-    // Extract fields needed for validation
     const {
       hasDiabetes,
       hadCovid,
@@ -23,14 +21,12 @@ export class ParticipantsService {
       weightInPounds,
     } = participantData;
 
-    // Ensure numerical values are correctly typed
     const height = Number(heightInInches);
     const weight = Number(weightInPounds);
 
-    // Calculate BMI using the formula: BMI = (weight / (height^2)) * 703
+    // formula: BMI = (weight / (height^2)) * 703
     const bmi = (weight / (height * height)) * 703;
 
-    // Eligibility criteria
     if (!hasDiabetes) {
       throw new BadRequestException('Participant must have diabetes.');
     }
@@ -45,7 +41,6 @@ export class ParticipantsService {
       );
     }
 
-    // Proceed with insertion if eligible
     const prismaData: Prisma.ParticipantCreateInput = {
       ...participantData,
       trial: trialId ? { connect: { id: trialId } } : undefined,

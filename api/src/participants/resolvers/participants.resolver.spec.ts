@@ -1,4 +1,3 @@
-// src/participants/resolvers/participants.resolver.spec.ts
 import { Test, TestingModule } from '@nestjs/testing';
 import { ParticipantsResolver } from './participants.resolver';
 import { ParticipantsService } from '../services/participants.service';
