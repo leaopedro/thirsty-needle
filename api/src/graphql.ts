@@ -1,4 +1,3 @@
-
 /*
  * -------------------------------------------------------
  * THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
@@ -9,39 +8,41 @@
 /* eslint-disable */
 
 export interface EnrollParticipantInput {
-    name: string;
-    hasDiabetes: boolean;
-    hadCovid: boolean;
-    heightInInches: number;
-    weightInPounds: number;
-    trialId: string;
+  name: string;
+  hasDiabetes: boolean;
+  hadCovid: boolean;
+  heightInInches: number;
+  weightInPounds: number;
+  trialId: string;
 }
 
 export interface IQuery {
-    participants(): Participant[] | Promise<Participant[]>;
-    trials(): Trial[] | Promise<Trial[]>;
+  participants(): Participant[] | Promise<Participant[]>;
+  trials(): Trial[] | Promise<Trial[]>;
 }
 
 export interface IMutation {
-    enrollParticipant(input: EnrollParticipantInput): Participant | Promise<Participant>;
+  enrollParticipant(
+    input: EnrollParticipantInput,
+  ): Participant | Promise<Participant>;
 }
 
 export interface Participant {
-    id: string;
-    name: string;
-    hasDiabetes: boolean;
-    hadCovid: boolean;
-    heightInInches: number;
-    weightInPounds: number;
-    enrolledAt: DateTime;
-    updatedAt: DateTime;
-    trial?: Nullable<Trial>;
+  id: string;
+  name: string;
+  hasDiabetes: boolean;
+  hadCovid: boolean;
+  heightInInches: number;
+  weightInPounds: number;
+  enrolledAt: DateTime;
+  updatedAt: DateTime;
+  trial?: Nullable<Trial>;
 }
 
 export interface Trial {
-    id: string;
-    name: string;
-    participantsCount: number;
+  id: string;
+  name: string;
+  participantsCount: number;
 }
 
 export type DateTime = any;

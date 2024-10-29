@@ -17,8 +17,12 @@ describe('ParticipantsService', () => {
     service = module.get<ParticipantsService>(ParticipantsService);
     prismaService = module.get<PrismaService>(PrismaService);
 
-    jest.spyOn(prismaService.participant, 'create').mockImplementation(jest.fn());
-    jest.spyOn(prismaService.participant, 'findMany').mockImplementation(jest.fn());
+    jest
+      .spyOn(prismaService.participant, 'create')
+      .mockImplementation(jest.fn());
+    jest
+      .spyOn(prismaService.participant, 'findMany')
+      .mockImplementation(jest.fn());
   });
 
   describe('enrollParticipant', () => {
@@ -44,7 +48,9 @@ describe('ParticipantsService', () => {
         trialId: input.trialId,
       };
 
-      (prismaService.participant.create as jest.Mock).mockResolvedValue(expectedParticipant);
+      (prismaService.participant.create as jest.Mock).mockResolvedValue(
+        expectedParticipant,
+      );
 
       const result = await service.enrollParticipant(input);
 
@@ -71,7 +77,9 @@ describe('ParticipantsService', () => {
         trialId: 'trial-123',
       };
 
-      await expect(service.enrollParticipant(input)).rejects.toThrow(BadRequestException);
+      await expect(service.enrollParticipant(input)).rejects.toThrow(
+        BadRequestException,
+      );
       await expect(service.enrollParticipant(input)).rejects.toThrow(
         'Participant must have diabetes.',
       );
@@ -88,7 +96,9 @@ describe('ParticipantsService', () => {
         trialId: 'trial-123',
       };
 
-      await expect(service.enrollParticipant(input)).rejects.toThrow(BadRequestException);
+      await expect(service.enrollParticipant(input)).rejects.toThrow(
+        BadRequestException,
+      );
       await expect(service.enrollParticipant(input)).rejects.toThrow(
         'Participant must not have had COVID-19.',
       );
@@ -105,7 +115,9 @@ describe('ParticipantsService', () => {
         trialId: 'trial-123',
       };
 
-      await expect(service.enrollParticipant(input)).rejects.toThrow(BadRequestException);
+      await expect(service.enrollParticipant(input)).rejects.toThrow(
+        BadRequestException,
+      );
       await expect(service.enrollParticipant(input)).rejects.toThrow(
         /Participant BMI must be greater than 18 and less than 30\. Current BMI: \d+(\.\d+)?/,
       );
@@ -122,7 +134,9 @@ describe('ParticipantsService', () => {
         trialId: 'trial-123',
       };
 
-      await expect(service.enrollParticipant(input)).rejects.toThrow(BadRequestException);
+      await expect(service.enrollParticipant(input)).rejects.toThrow(
+        BadRequestException,
+      );
       await expect(service.enrollParticipant(input)).rejects.toThrow(
         /Participant BMI must be greater than 18 and less than 30\. Current BMI: \d+(\.\d+)?/,
       );
@@ -139,7 +153,9 @@ describe('ParticipantsService', () => {
         trialId: 'trial-123',
       };
 
-      await expect(service.enrollParticipant(input)).rejects.toThrow(BadRequestException);
+      await expect(service.enrollParticipant(input)).rejects.toThrow(
+        BadRequestException,
+      );
       expect(prismaService.participant.create).not.toHaveBeenCalled();
     });
   });

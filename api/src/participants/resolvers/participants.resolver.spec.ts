@@ -43,7 +43,9 @@ describe('ParticipantsResolver', () => {
         },
       ];
 
-      (participantsService.getParticipants as jest.Mock).mockResolvedValue(participants);
+      (participantsService.getParticipants as jest.Mock).mockResolvedValue(
+        participants,
+      );
 
       const result = await resolver.participants();
 
@@ -79,7 +81,9 @@ describe('ParticipantsResolver', () => {
         },
       };
 
-      (participantsService.enrollParticipant as jest.Mock).mockResolvedValue(expectedParticipant);
+      (participantsService.enrollParticipant as jest.Mock).mockResolvedValue(
+        expectedParticipant,
+      );
 
       const result = await resolver.enrollParticipant(input);
 
@@ -99,10 +103,16 @@ describe('ParticipantsResolver', () => {
 
       const error = new BadRequestException('Participant must have diabetes.');
 
-      (participantsService.enrollParticipant as jest.Mock).mockRejectedValue(error);
+      (participantsService.enrollParticipant as jest.Mock).mockRejectedValue(
+        error,
+      );
 
-      await expect(resolver.enrollParticipant(input)).rejects.toThrow(BadRequestException);
-      await expect(resolver.enrollParticipant(input)).rejects.toThrow('Participant must have diabetes.');
+      await expect(resolver.enrollParticipant(input)).rejects.toThrow(
+        BadRequestException,
+      );
+      await expect(resolver.enrollParticipant(input)).rejects.toThrow(
+        'Participant must have diabetes.',
+      );
       expect(participantsService.enrollParticipant).toHaveBeenCalledWith(input);
     });
   });

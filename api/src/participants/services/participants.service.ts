@@ -14,12 +14,8 @@ export class ParticipantsService {
   async enrollParticipant(data: EnrollParticipantInput): Promise<Participant> {
     const { trialId, ...participantData } = data;
 
-    const {
-      hasDiabetes,
-      hadCovid,
-      heightInInches,
-      weightInPounds,
-    } = participantData;
+    const { hasDiabetes, hadCovid, heightInInches, weightInPounds } =
+      participantData;
 
     const height = Number(heightInInches);
     const weight = Number(weightInPounds);
