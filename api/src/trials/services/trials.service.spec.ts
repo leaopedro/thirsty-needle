@@ -22,12 +22,12 @@ describe('TrialsService', () => {
         {
           id: '1',
           name: 'Trial 1',
-          participants: [{id: '1'}, {id: '2'}, {id: '3'}],
+          participants: [{ id: '1' }, { id: '2' }, { id: '3' }],
         },
         {
           id: '2',
           name: 'Trial 2',
-          participants: [{id: '4'}],
+          participants: [{ id: '4' }],
         },
       ];
 

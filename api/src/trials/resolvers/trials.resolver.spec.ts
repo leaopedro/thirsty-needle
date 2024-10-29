@@ -32,7 +32,9 @@ describe('TrialsResolver', () => {
         },
       ];
 
-      jest.spyOn(trialsService, 'getTrialsWithParticipantsCount').mockResolvedValue(result);
+      jest
+        .spyOn(trialsService, 'getTrialsWithParticipantsCount')
+        .mockResolvedValue(result);
 
       expect(await resolver.trials()).toEqual(result);
     });

@@ -6,6 +6,12 @@ import { TrialsResolver } from 'src/trials/resolvers/trials.resolver';
 import { TrialsService } from 'src/trials/services/trials.service';
 
 @Module({
-  providers: [ParticipantsResolver, ParticipantsService, TrialsResolver, TrialsService, PrismaService],
+  providers: [
+    ParticipantsResolver,
+    ParticipantsService,
+    TrialsResolver,
+    TrialsService,
+    PrismaService,
+  ],
 })
 export class ParticipantsModule {}
