@@ -1,82 +1,88 @@
-# Sr. Engineer tech assessment
-As a Sr. Engineer we want to see your skills with architecture, security, performance and clean code.
-<br />
+# Clinical Trial Management App
 
-The following tech stack are required:
-- TypeScript
-- React
+This is a responsive React application for managing clinical trials, allowing users to view participants, trials, and enroll new participants in clinical trials. The application follows a clean architecture and uses TypeScript with modern development best practices.
 
-These ones will be considered a differential, but are not required:
-- [Apollo Client](https://www.apollographql.com/docs/react/) or [React Query](https://react-query.tanstack.com/)
-- [Styled Components](https://styled-components.com/)
-- Unit Tests
+## Tech Stack
 
-<br />
+**Frontend**:
+- React (with TypeScript)
+- Apollo Client (GraphQL Client)
+- Styled Components (CSS-in-JS for styling)
 
-# Goal
-Develop a responsive React application based on this [Figma](https://www.figma.com/file/IGiTFyYotEnc94XwfMuVCE/Tech-Assessment?node-id=0%3A1) file, consuming a GraphQL endpoint.
-# Nice to have
-- Application is packaged in Docker.
-# Screens
+**Backend**:
+- Node.js (with TypeScript)
+- Nest.js Framework
+- Apollo Server (GraphQL API)
+- Prisma ORM
+- PostgreSQL (Database)
 
-## Participants
-You should fetch all the `participants` from GraphQL and list them on this screen.
-  
-## Trials
-You should fetch all the `trials` from GraphQL and list them on this screen.
+**Additional Tools**:
+- Docker (for containerizing the PostgreSQL database)
+- Jest and React Testing Library (for unit tests)
 
-## Enroll a participant
-This is a form to enroll a new participant to a clinical trial, all fields are required.
+## Key Features
 
-After you fill all the fields and clicked to persist the participant to the `participants` collection (doing a mutation to the GraphQL), you should redirect the user to a success screen presenting a message that shows if the participant is eligible or not for the clinical trial.
+- **Participants Listing**: Displays a list of participants, fetched from the GraphQL API.
+- **Trials Listing**: Lists all clinical trials fetched from the GraphQL API.
+- **Enroll a Participant**: Provides a form to enroll a new participant to a clinical trial and determines their eligibility.
+- **Responsive Design**: Fully responsive and designed based on the provided Figma file.
 
-An eligible participant should:
-- HAS DIABETES
-- DIDN'T HAVE COVID
-- BMI > 18
-- BMI < 30
+## Running the Application
 
-> BMI Formula: **weight (lb) / [height (in)]2 x 703**
->
-> Divide weight in pounds (lb) by height in inches (in) squared and multiplying by a conversion factor of 703
+### Prerequisites
 
-<br />
+- Ensure you have **Node.js** (> 14.0.0) and **Docker** installed.
+- Docker is used to run the PostgreSQL database.
 
-# GraphQL API
+### Setup Instructions
 
-We have a basic API setup on `/api`.
+1. **Clone the repository**:
+   ```sh
+   git clone <your-repo-url>
+   cd <repo-directory>
+   ```
 
-You need to setup a fresh API that implements the necessary GraphQL resolvers to retrieve / create / update the necessary data.
+2. **Run PostgreSQL database with Docker**:
+   ```sh
+   docker-compose up
+   ```
+This will start a PostgreSQL instance on `localhost:5432`.
 
-Feel free to use the tools of our choice to build that GraphQL API.
+3. **Run migrations to ensure db structure**:
+   ```sh
+   npx prisma migrate dev
+   ```
+4. **Install dependencies and start the application**:
+   ```sh
+   yarn && yarn start
+   ```
 
-FAQ:
-- You can use any framework of your choice like Nest.js, vanilla express + Apollo Server etc.
-- You can use any ORM like Prisma, Sequelize etc.
-- You can use any DBMS like Postgres, SQLite, MongoDB etc.
+5. **Access the application**:
+   - The application will be running at [http://localhost:3000](http://localhost:3000).
 
-<br />
+### Running Tests
 
-# Notes
-- You need to be logged in with your Figma account to have access to all specs of the file and be able to extract colors, fonts, sizes and etc...
-- Ensure that you have Node >=14.0.0 to run this project
-- If you have any questions, don't hesitate to touch base with us.
+To run unit tests:
+```sh
+yarn test
+```
 
-<br />
+## GraphQL API Endpoints
 
-# Running instructions
-`yarn && yarn start`
+The GraphQL API is served at `/api` and provides the following operations:
+- **Query `participants`**: Retrieve all participants.
+- **Query `trials`**: Retrieve all clinical trials.
+- **Mutation `enrollParticipant`**: Enroll a new participant and determine their eligibility for clinical trials.
 
-<br />
+### Eligibility Criteria for Participants
+A participant is eligible for a clinical trial if:
+- **Has Diabetes**
+- **Did not have COVID**
+- **BMI is between 18 and 30**
 
-# How to delivery your tech assessment
-Clone this repo and push it to a private repo on your account, and then give access to the following users:
-- [@joaom182](https://github.com/joaom182)
-- [@lobo](https://github.com/lobo)
-- [@avilesj](https://github.com/avilesj)
-- [@guilhermeKodama](https://github.com/guilhermeKodama)
+> BMI Calculation: **weight (lb) / [height (in)]² x 703**
 
-When you are done with the tech assessment, please send an email to:
-- daniel@curebase.com
+## Deployment
+The application can be containerized using Docker and deployed to any cloud provider or Kubernetes cluster, making it ready for production environments.
 
 Cheers! 🍻

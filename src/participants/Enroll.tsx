@@ -26,7 +26,7 @@ export const GET_TRIALS = gql`
   }
 `;
 
-const ENROLL_PARTICIPANT = gql`
+export const ENROLL_PARTICIPANT = gql`
   mutation CreateParticipant($input: EnrollParticipantInput!) {
     enrollParticipant(input: $input) {
       id
@@ -59,12 +59,10 @@ const EnrollParticipant: React.FC = () => {
     };
   
     enrollParticipant({ variables: { input } })
-      .then(response => {
-        console.log('Participant created:', response.data.enrollParticipant);
+      .then(() => {
         setResult({success: true})
       })
       .catch(err => {
-        console.error('Error creating participant:', err);
         setResult({success: false, message: err.message})
       });
   };
@@ -78,7 +76,6 @@ const EnrollParticipant: React.FC = () => {
         <Button onClick={() => navigate('/participants')} >Ok</Button>
       </ResultContainer>
     );
-
   }
 
   return (
@@ -86,20 +83,20 @@ const EnrollParticipant: React.FC = () => {
       <Title>Enroll a participant</Title>
 
       <FormField>
-        <Label>Name</Label>
-        <Input {...register('name', { required: 'This is a required field' })} />
+        <Label htmlFor="name">Name</Label>
+        <Input id="name" {...register('name', { required: 'This is a required field' })} />
         {errors.name && <ErrorMessage>{errors.name.message}</ErrorMessage>}
       </FormField>
 
       <FormField>
-        <Label>Height (inches)</Label>
-        <NumberInput type="number" {...register('heightInInches', { required: 'This is a required field' })} />
+        <Label htmlFor="heightInInches">Height (inches)</Label>
+        <NumberInput id="heightInInches" type="number" {...register('heightInInches', { required: 'This is a required field' })} />
         {errors.heightInInches && <ErrorMessage>{errors.heightInInches.message}</ErrorMessage>}
       </FormField>
 
       <FormField>
-        <Label>Weight (pounds)</Label>
-        <NumberInput type="number" {...register('weightInPounds', { required: 'This is a required field' })} />
+        <Label htmlFor="weightInPounds">Weight (pounds)</Label>
+        <NumberInput id="weightInPounds" type="number" {...register('weightInPounds', { required: 'This is a required field' })} />
         {errors.weightInPounds && <ErrorMessage>{errors.weightInPounds.message}</ErrorMessage>}
       </FormField>
 
@@ -116,8 +113,9 @@ const EnrollParticipant: React.FC = () => {
       </FormField>
 
       <FormField>
-        <Label>Trial</Label>
+        <Label htmlFor="trial">Trial</Label>
         <Select
+          id="trial" 
           {...register('trial', { required: 'This is a required field' })}
         >
           {loading && <option value="">Loading trials...</option>}
@@ -136,7 +134,7 @@ const EnrollParticipant: React.FC = () => {
         {errors.trial && <ErrorMessage>{errors.trial.message}</ErrorMessage>}
       </FormField>
 
-      <Button type="submit">Save</Button>
+      <Button data-testid="submit" type="submit">Save</Button>
     </FormContainer>
   );
 };

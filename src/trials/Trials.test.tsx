@@ -12,9 +12,9 @@ const mocks = [
     result: {
       data: {
         trials: [
-          { id: '1', name: 'TestTrial 01', participantsCount: 230 },
-          { id: '2', name: 'TestTrial 02', participantsCount: 577 },
-          { id: '3', name: 'TestTrial 03', participantsCount: 80 },
+          { id: '1', name: 'TestTrial 01', participantsCount: 230, __typename: 'Trial'  },
+          { id: '2', name: 'TestTrial 02', participantsCount: 577, __typename: 'Trial'  },
+          { id: '3', name: 'TestTrial 03', participantsCount: 80, __typename: 'Trial'  },
         ],
       },
     },
@@ -24,7 +24,7 @@ const mocks = [
 describe('Trials Component', () => {
   it('should render loading state initially', () => {
     render(
-      <MockedProvider mocks={[]} addTypename={false}>
+      <MockedProvider mocks={mocks}>
         <Trials />
       </MockedProvider>
     );
@@ -34,14 +34,14 @@ describe('Trials Component', () => {
 
   it('should render trials after data is loaded', async () => {
     render(
-      <MockedProvider mocks={mocks} addTypename={false}>
+      <MockedProvider mocks={mocks}>
         <Trials />
       </MockedProvider>
     );
 
     const trialElements = await screen.findAllByText(/TestTrial/i);
     expect(trialElements.length).toBe(3);
-    expect(screen.getByText(/Trial 01/i)).toBeInTheDocument();
+    expect(screen.getByText(/TestTrial 01/i)).toBeInTheDocument();
     expect(screen.getByText(/230 participants/i)).toBeInTheDocument();
   });
 
@@ -56,7 +56,7 @@ describe('Trials Component', () => {
     ];
 
     render(
-      <MockedProvider mocks={errorMock} addTypename={false}>
+      <MockedProvider mocks={errorMock}>
         <Trials />
       </MockedProvider>
     );
