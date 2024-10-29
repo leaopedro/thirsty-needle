@@ -38,8 +38,8 @@ This is a responsive React application for managing clinical trials, allowing us
 
 1. **Clone the repository**:
    ```sh
-   git clone <your-repo-url>
-   cd <repo-directory>
+   git clone https://github.com/leaopedro/thirsty-needle.git
+   cd thirsty-needle
    ```
 
 2. **Run PostgreSQL database with Docker**:
